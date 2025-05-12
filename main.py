@@ -6,15 +6,15 @@ from colorama import init, Fore
 
 def get_difficulty():
     difficulty_map = {
-        '1': (1, 10, 5),
-        '2': (1, 50, 7),
-        '3': (1, 100, 10),
+        '1': (-10, 10, 5),
+        '2': (-50, 50, 7),
+        '3': (-100, 100, 10),
     }
 
     print(Fore.CYAN + "Выберите уровень сложности:")
-    print("1 - Лёгкий (число от 1 до 10, 5 попыток)")
-    print("2 - Средний (число от 1 до 50, 7 попыток)")
-    print("3 - Сложный (число от 1 до 100, 10 попыток)")
+    print("1 - Лёгкий (число от -10 до 10, 5 попыток)")
+    print("2 - Средний (число от -50 до 50, 7 попыток)")
+    print("3 - Сложный (число от -100 до 100, 10 попыток)")
 
     while True:
         choice = input(Fore.CYAN + "Ваш выбор: ")
@@ -37,9 +37,10 @@ def main():
     print(Fore.YELLOW + f"Попробуйте угадать число от {low} до {high}. У вас есть {time_limit} секунд и {max_attempts} попыток.")
 
     attempts = 0
-    hints_left = 1  # Начальное количество подсказок
+    hints_left = 1
 
     while attempts < max_attempts:
+
         # Проверяем, сколько времени прошло
         elapsed_time = time.time() - start_time
         remaining_time = time_limit - elapsed_time
@@ -55,7 +56,7 @@ def main():
         # Предлагаем ввести либо число, либо нажать h для подсказки
         user_input = input(Fore.YELLOW + f"Попытка {attempts + 1}/{max_attempts}. Введите число для следующей попытки или 'h' для подсказки: ")
 
-        # Если введено 'h', показываем подсказку
+
         if user_input.lower() == 'h':
             if hints_left > 0:
                 print(Fore.CYAN + f"Осталось подсказок: {hints_left}. Загаданное число {'больше' if number > 50 else 'меньше'}.")
@@ -64,7 +65,6 @@ def main():
                 print(Fore.RED + "Подсказки закончились!")
             continue
 
-        # Если введено число, проверяем
         try:
             guess = int(user_input)
             attempts += 1
