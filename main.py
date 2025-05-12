@@ -9,19 +9,27 @@ def get_difficulty():
         '1': (-10, 10, 5),
         '2': (-50, 50, 7),
         '3': (-100, 100, 10),
+        '4': (-2, 10, 5)
     }
 
     print(Fore.CYAN + "Выберите уровень сложности:")
     print("1 - Лёгкий (число от -10 до 10, 5 попыток)")
     print("2 - Средний (число от -50 до 50, 7 попыток)")
     print("3 - Сложный (число от -100 до 100, 10 попыток)")
+    print("4 - Пользовательский")
 
     while True:
         choice = input(Fore.CYAN + "Ваш выбор: ")
         if choice in difficulty_map:
-            return difficulty_map[choice]
+            if choice == '4':
+                low_range = int(input('Введите нижнюю границу:'))
+                upper_range = int(input('Введите верхнюю границу:'))
+                trials_cnt = int(input('Введите число попыток:'))
+                return (low_range, upper_range, trials_cnt)
+            else:
+                return difficulty_map[choice]
         else:
-            print(Fore.RED + "Введите 1, 2 или 3.")
+            print(Fore.RED + "Введите 1, 2, 3 или 4.")
 
 def main():
     print(Fore.GREEN + "Добро пожаловать в игру 'Угадай число'!")
