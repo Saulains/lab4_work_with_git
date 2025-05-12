@@ -21,7 +21,13 @@ def get_difficulty():
     while True:
         choice = input(Fore.CYAN + "Ваш выбор: ")
         if choice in difficulty_map:
-            return difficulty_map[choice]
+            if choice == '4':
+                low_range = int(input('Введите нижнюю границу:'))
+                upper_range = int(input('Введите верхнюю границу:'))
+                trials_cnt = int(input('Введите число попыток:'))
+                return (low_range, upper_range, trials_cnt)
+            else:
+                return difficulty_map[choice]
         else:
             print(Fore.RED + "Введите 1, 2, 3 или 4.")
 
